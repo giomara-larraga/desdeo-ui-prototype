@@ -13,7 +13,7 @@ COPY . .
 
 EXPOSE 8080
 
-# Set the default command to run the application
+# Use Gunicorn to start the app
 CMD ["gunicorn", "-b", "0.0.0.0:8080", "app:server"]
 
 
