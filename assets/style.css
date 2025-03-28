@@ -1,0 +1,133 @@
+/* style.css */
+/* Define the Roboto font (regular style) with multiple weights */
+/* primary color #092C4C */
+/* secondary color #4DB5BD*/
+@font-face {
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-style: normal;
+    src: url('/assets/fonts/Roboto-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-style: normal;
+    src: url('/assets/fonts/Roboto-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-style: normal;
+    src: url('/assets/fonts/Roboto-Regular.ttf') format('truetype');
+}
+
+/* Define the Roboto font (italic style) with multiple weights */
+@font-face {
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-style: italic;
+    src: url('/assets/fonts/Roboto-Italic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-style: italic;
+    src: url('/assets/fonts/Roboto-Italic.ttf') format('truetype');
+}
+
+
+/* Default font-family for the app */
+body {
+    font-family: 'Roboto', sans-serif;
+    /*font-size: 12px;*/
+    background-color: #DFE1E5;
+}
+
+h5 {
+    font-size: 1rem;
+    /*font-size: 14px;*/
+    font-weight:500;
+    color: #092C4C;
+}
+
+.content {
+    padding: 20px;
+    background-color: #DFE1E5;
+}
+
+/* Custom style for dbc.NavbarSimple */
+.custom-navbar {
+    background-color: #1e2a3a !important; /* Dark blue background */
+    color: white; /* White text color */
+    font-family: 'Roboto', sans-serif; /* Custom font family */
+    font-weight: 400; /* Bold font weight */
+    padding: 5px 5px;  /* Reduce padding (vertical: 5px, horizontal: 15px) */
+}
+
+/* Remove margin from container inside the navbar */
+.custom-navbar .container {
+    margin-left: 0 !important;  /* Remove left margin */
+    margin-right: 0 !important; /* Remove right margin */
+    padding-left: 15px;         /* Optional: You can add some padding for spacing */
+    padding-right: 15px;        /* Optional: You can add some padding for spacing */
+}
+
+/* Ensure right-alignment for navbar items */
+.custom-navbar .navbar-nav {
+    margin-left: auto !important;
+    margin-right: 0 !important; /* Ensures no right margin */
+}
+
+.custom-navbar .navbar-brand {
+    font-size: medium;
+    font-weight: 400;
+    color: white;
+    margin-right: 15px; /* Reduce space between brand and nav items */
+}
+
+.custom-navbar .navbar-nav .nav-link {
+    color: white !important; /* Ensure nav-link color is white */
+    margin-right: 10px;  /* Reduce space between nav items */
+}
+
+
+.custom-navbar .navbar-nav .nav-link:hover {
+    color: #4DB5BD !important; /* Hover effect color */
+}
+
+.custom-navbar .navbar-toggler-icon {
+    background-color: #ffffff; /* Custom color for the hamburger menu */
+}
+
+
+/* Sidebar Preferences */
+.sidebar-preferences {
+    padding-left: 20px;
+    padding-right: 10px;
+    padding-top: 5px;
+    background: #fff !important;
+    height: 100vh;
+    border-right: solid 1px #A09B9B;
+}
+
+.description-text {
+    font-size: 0.8rem !important;
+}
+
+
+/* Sidebar explanations */
+.sidebar-explanations {
+    padding-left: 20px;
+    padding-top: 5px;
+    background: #fff !important;
+    height: 100vh;
+    border-left: solid 1px #A09B9B;
+}
+
+/* Solutions panel */
+.solutions-panel {
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+}

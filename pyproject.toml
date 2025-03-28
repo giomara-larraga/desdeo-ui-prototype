@@ -1,0 +1,23 @@
+[project]
+name = "desdeo-ui-prototype"
+version = "0.1.0"
+description = "An UI for explainable multiobjective optimization using Plotly Dash"
+authors = [
+    {name = "giomara-larraga",email = "giomara.lm@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10,<3.11"
+dependencies = [
+    "desdeo-mcdm (>=1.3.3,<2.0.0)",
+    "desdeo-emo (>=1.5.0,<2.0.0)",
+    "desdeo-tools (==1.8.0)",
+    "desdeo-problem (==1.5.0)",
+    "shap (>=0.47.0,<0.48.0)",
+    "dash (>=3.0.0,<4.0.0)",
+    "dash-bootstrap-components (>=2.0.0,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
