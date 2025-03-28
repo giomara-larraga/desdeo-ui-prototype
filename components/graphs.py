@@ -187,6 +187,26 @@ def get_bar_chart():
             zeroline=True,  # Draw zero line
             zerolinecolor="black",  # Make it more visible
         ),
+        annotations=[
+            dict(
+                x=0.25,
+                y=1.15,
+                xref="paper",
+                yref="paper",
+                text="<span style='color:#C00000; font-size:16px'>&#9632;</span> Increase",
+                showarrow=False,
+                font=dict(size=14),
+            ),
+            dict(
+                x=0.75,
+                y=1.15,
+                xref="paper",
+                yref="paper",
+                text="<span style='color:blue; font-size:16px'>&#9632;</span> Decrease",
+                showarrow=False,
+                font=dict(size=14),
+            ),
+        ],
     )
 
     return fig
