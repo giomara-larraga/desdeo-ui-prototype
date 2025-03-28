@@ -22,6 +22,9 @@ app_layout = html.Div(
             id="opt1-problem-data-store", storage_type="session", data=problem_data
         ),
         dcc.Store(id="opt1-shap-values-store", storage_type="session", data=None),
+        dcc.Store(
+            id="opt1-selected-objective-store", storage_type="session", data=None
+        ),
         dcc.Store(id="click-store", data={"n_clicks": 0}),
         dcc.Location(id="url", refresh=False),
         navbar,

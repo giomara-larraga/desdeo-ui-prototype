@@ -17,7 +17,7 @@ from shapley_values.utilities import (
 from desdeo_problem.problem import DiscreteDataProblem
 import pandas as pd
 import numpy as np
-from components.graphs import build_pcp, get_sample_pcp
+from components.graphs import build_pcp, get_sample_pcp, build_bar_chart
 
 
 # Callback to store the slider values in a new store
@@ -90,3 +90,28 @@ def update_chart(solution, preferences):
 
     # Generate the updated graph (replace with actual plotting code)
     return build_pcp(solution, preferences)
+
+
+# Update chart ONLY when the iterate button is clicked
+@app.callback(
+    Output("bar-chart", "figure"),
+    [Input("opt1-selected-objective-store", "data")],
+    [State("opt1-shap-values-store", "data")],  # Use State instead of Input
+)
+def update_bar_chart(selected_objective, shap_values):
+    if shap_values is None:
+        return no_update  # Prevent update if solution is not ready
+
+    if selected_objective is None:
+        return no_update
+    # Generate the updated graph (replace with actual plotting code)
+    return build_bar_chart(shap_values[selected_objective], selected_objective)
+
+
+@app.callback(
+    Output("opt1-selected-objective-store", "data"),
+    Input("objectives-dropdown", "value"),
+)
+def update_output(value):
+    print("selected ", value)
+    return value

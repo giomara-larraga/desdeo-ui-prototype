@@ -1,6 +1,7 @@
 from dash import html, dcc
-from components.graphs import get_bar_chart
+from components.graphs import get_sample_bar_chart
 from data.constants import data_problem
+import dash_bootstrap_components as dbc
 
 sidebar_explanations_option1 = html.Div(
     [
@@ -41,12 +42,11 @@ sidebar_explanations_option1 = html.Div(
                     zip(data_problem[0]["objective_names"], data_problem[0]["colors"])
                 )
             ],
-            value=0,  # Default selection (first objective)
             placeholder="Select an objective function to improve",
         ),
         dcc.Graph(
-            id="line-chart",
-            figure=get_bar_chart(),
+            id="bar-chart",
+            figure=get_sample_bar_chart(),
             style={
                 "margin": "0",
                 "padding": "0",

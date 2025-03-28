@@ -131,3 +131,10 @@ h5 {
     padding-left: 20px;
     padding-right: 20px;
 }
+
+.list-group{
+    border: none;
+}
+.list-group-item{
+    border: none;
+}

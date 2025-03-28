@@ -138,9 +138,9 @@ def build_pcp(solution, preferences):
     return fig
 
 
-def get_bar_chart():
+def get_sample_bar_chart():
     objectives = data_problem[0]["objective_names"]
-    values = [500, -600, 700, 500, -55]  # Example values
+    values = [0, 0, 0, 0, 0]  # Example values
 
     # Assign colors based on value (red if >0, blue if <0)
     colors = ["#C00000" if v > 0 else "blue" for v in values]
@@ -155,13 +155,36 @@ def get_bar_chart():
             x=colored_labels,
             y=values,
             marker=dict(color=colors),  # Set color dynamically
+            showlegend=False,  # Hide this trace from the legend
+            text="test",
             # marker_color="crimson",
-            name="expenses",
+        )
+    )
+    # Dummy Scatter Traces for Legend
+    fig.add_trace(
+        go.Scatter(
+            x=[None],  # Empty x value, just for legend
+            y=[None],  # Empty y value, just for legend
+            mode="markers",
+            marker=dict(size=12, color="#C00000"),  # Red marker
+            name="Impairing effect",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            x=[None],  # Empty x value
+            y=[None],  # Empty y value
+            mode="markers",
+            marker=dict(size=12, color="blue"),  # Blue marker
+            name="Improving effect",
         )
     )
     fig.update_layout(
-        height=200,  # Set the height (in pixels)
-        margin=dict(l=1, r=0, t=0, b=0),  # Remove left, right, top, and bottom margins
+        height=250,  # Set the height (in pixels)
+        margin=dict(
+            l=1, r=0, t=50, b=10
+        ),  # Remove left, right, top, and bottom margins
         plot_bgcolor="white",
         xaxis=dict(
             layer="above traces",  # Ensures x-axis is on top
@@ -187,26 +210,97 @@ def get_bar_chart():
             zeroline=True,  # Draw zero line
             zerolinecolor="black",  # Make it more visible
         ),
-        annotations=[
-            dict(
-                x=0.25,
-                y=1.15,
-                xref="paper",
-                yref="paper",
-                text="<span style='color:#C00000; font-size:16px'>&#9632;</span> Increase",
-                showarrow=False,
-                font=dict(size=14),
-            ),
-            dict(
-                x=0.75,
-                y=1.15,
-                xref="paper",
-                yref="paper",
-                text="<span style='color:blue; font-size:16px'>&#9632;</span> Decrease",
-                showarrow=False,
-                font=dict(size=14),
-            ),
-        ],
+        legend=dict(
+            orientation="h",  # Horizontal legend
+            yanchor="bottom",
+            y=1.1,  # Position above the plot
+            xanchor="center",
+            x=0.5,  # Centered
+        ),
+    )
+
+    return fig
+
+
+def build_bar_chart(values, selected_objective):
+    objectives = data_problem[0]["objective_names"]
+    # values = [500, -600, 700, 500, -55]  # Example values
+
+    # Assign colors based on value (red if >0, blue if <0)
+    colors = ["#C00000" if v > 0 else "blue" for v in values]
+    colored_labels = [
+        f"<span style='color:{c}; font-size:20px'>&#9632;</span> {obj}"
+        for obj, c in zip(objectives, data_problem[0]["colors"])
+    ]
+
+    fig = go.Figure()
+    fig.add_trace(
+        go.Bar(
+            x=colored_labels,
+            y=values,
+            marker=dict(color=colors),  # Set color dynamically
+            showlegend=False,  # Hide this trace from the legend
+            text="test",
+            # marker_color="crimson",
+        )
+    )
+    # Dummy Scatter Traces for Legend
+    fig.add_trace(
+        go.Scatter(
+            x=[None],  # Empty x value, just for legend
+            y=[None],  # Empty y value, just for legend
+            mode="markers",
+            marker=dict(size=12, color="#C00000"),  # Red marker
+            name="Impairing effect",
+        )
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            x=[None],  # Empty x value
+            y=[None],  # Empty y value
+            mode="markers",
+            marker=dict(size=12, color="blue"),  # Blue marker
+            name="Improving effect",
+        )
+    )
+    fig.update_layout(
+        height=250,  # Set the height (in pixels)
+        margin=dict(
+            l=1, r=0, t=50, b=10
+        ),  # Remove left, right, top, and bottom margins
+        plot_bgcolor="white",
+        xaxis=dict(
+            layer="above traces",  # Ensures x-axis is on top
+            tickmode="array",
+            tickvals=[
+                i for i in range(len(objectives))
+            ],  # Ensure the tick positions correspond to bars
+            ticktext=colored_labels,
+            showline=True,
+            linewidth=1,
+            linecolor="black",
+            mirror=True,
+            ticks="outside",  # Ensures the ticks appear outside the axis
+            tickangle=0,  # Ensures the ticks are horizontal
+        ),
+        yaxis=dict(
+            layer="above traces",  # Ensures x-axis is on top
+            showticklabels=False,
+            showline=True,
+            linewidth=1,
+            linecolor="black",
+            mirror=True,
+            zeroline=True,  # Draw zero line
+            zerolinecolor="black",  # Make it more visible
+        ),
+        legend=dict(
+            orientation="h",  # Horizontal legend
+            yanchor="bottom",
+            y=1.1,  # Position above the plot
+            xanchor="center",
+            x=0.5,  # Centered
+        ),
     )
 
     return fig
