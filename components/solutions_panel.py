@@ -1,17 +1,8 @@
 from dash import html, dcc
 import dash_bootstrap_components as dbc
 from components.graphs import get_sample_pcp
-
+from components.solutions_table import create_table
 import pandas as pd
-
-df = pd.DataFrame(
-    {
-        "First Name": ["Arthur", "Ford", "Zaphod", "Trillian"],
-        "Last Name": ["Dent", "Prefect", "Beeblebrox", "Astra"],
-    }
-)
-
-table = dbc.Table.from_dataframe(df, striped=True, bordered=True, hover=True)
 
 card = dbc.Card(
     dbc.CardBody(
@@ -33,7 +24,11 @@ card_table = dbc.Card(
     dbc.CardBody(
         [
             html.H6("Numerical results", className="card-title"),
-            table,
+            dcc.Graph(
+                id="solutions-table",
+                figure=create_table(None, None),
+                style={"margin": "0", "padding": "0"},
+            ),
         ]
     ),
     style={"width": "100%"},

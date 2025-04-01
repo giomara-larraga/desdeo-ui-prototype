@@ -30,7 +30,7 @@ def create_sidebar_preferences():
                                 "borderRadius": "3px",
                             }
                         ),
-                        f"{objective} (max)",
+                        f"{objective} (min)",
                     ]
                 ),
                 dcc.Slider(

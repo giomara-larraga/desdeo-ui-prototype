@@ -2,6 +2,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from data.constants import data_problem
 import pandas as pd
+import numpy as np
 
 
 def get_sample_pcp():
@@ -233,6 +234,8 @@ def build_bar_chart(values, selected_objective):
         for obj, c in zip(objectives, data_problem[0]["colors"])
     ]
 
+    values[selected_objective] = 0
+
     fig = go.Figure()
     fig.add_trace(
         go.Bar(
@@ -240,7 +243,7 @@ def build_bar_chart(values, selected_objective):
             y=values,
             marker=dict(color=colors),  # Set color dynamically
             showlegend=False,  # Hide this trace from the legend
-            text="test",
+            # text="test",
             # marker_color="crimson",
         )
     )
@@ -301,6 +304,48 @@ def build_bar_chart(values, selected_objective):
             xanchor="center",
             x=0.5,  # Centered
         ),
+    )
+
+    return fig
+
+
+def build_heatmap(values):
+    objectives = data_problem[0]["objective_names"]  # Get row/column names
+    print(values)
+    # Check if values is None or empty
+    if values is None or len(values) == 0:
+        # Return an empty figure
+        fig = go.Figure()
+        fig.update_layout(
+            title="No Data Available", height=250, margin=dict(l=1, r=0, t=50, b=10)
+        )
+        return fig
+
+    # Convert values to a NumPy array for safety
+    values = np.array(values)
+
+    # Ensure it's an N × N matrix
+    if values.shape[0] != values.shape[1]:
+        raise ValueError("Input matrix must be square (N × N).")
+
+    np.fill_diagonal(values, 0)
+
+    fig = go.Figure(
+        data=go.Heatmap(
+            z=values,  # Data matrix
+            x=objectives,  # Column names
+            y=objectives,  # Row names
+            colorscale="RdBu_r",  # Red for negative, blue for positive
+            zmid=0,  # Center scale at 0
+            showscale=False,  # Hide the color bar
+        )
+    )
+
+    fig.update_layout(
+        height=250,
+        margin=dict(l=1, r=0, t=5, b=10),
+        xaxis_title="Reference point",  # X-axis label
+        yaxis_title="Obtained solution",
     )
 
     return fig

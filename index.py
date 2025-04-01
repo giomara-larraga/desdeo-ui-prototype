@@ -28,12 +28,12 @@ app_layout = html.Div(
         dcc.Store(id="click-store", data={"n_clicks": 0}),
         dcc.Location(id="url", refresh=False),
         navbar,
-        html.Div(id="page-content"),
+        home.layout,
     ]
 )
 
 
-@app.callback(Output("page-content", "children"), Input("url", "pathname"))
+""" @app.callback(Output("page-content", "children"), Input("url", "pathname"))
 def display_page(pathname):
     if pathname == "/option_1":
         return main_layout.create_layout(
@@ -44,7 +44,7 @@ def display_page(pathname):
             sidebar_preferences, solutions_panel, sidebar_explanations_option2
         )
     else:
-        return home.layout
+        return home.layout """
 
 
 # Import the callbacks after the layout definition to avoid circular import

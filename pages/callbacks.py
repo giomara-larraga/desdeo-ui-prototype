@@ -17,7 +17,8 @@ from shapley_values.utilities import (
 from desdeo_problem.problem import DiscreteDataProblem
 import pandas as pd
 import numpy as np
-from components.graphs import build_pcp, get_sample_pcp, build_bar_chart
+from components.graphs import build_pcp, get_sample_pcp, build_bar_chart, build_heatmap
+from components.solutions_table import create_table
 
 
 # Callback to store the slider values in a new store
@@ -80,16 +81,27 @@ def load_data(n_clicks, preferences, click_data):
 
 # Update chart ONLY when the iterate button is clicked
 @app.callback(
-    Output("pcp-chart", "figure"),
-    [Input("opt1-current-solution-store", "data")],
+    [
+        Output("pcp-chart", "figure"),
+        Output("solutions-table", "figure"),
+        Output("heatmap", "figure"),
+    ],
+    [
+        Input("opt1-current-solution-store", "data"),
+        Input("opt1-shap-values-store", "data"),
+    ],
     [State("opt1-preferences-store", "data")],  # Use State instead of Input
 )
-def update_chart(solution, preferences):
+def update_chart(solution, shap_values, preferences):
     if solution is None:
         return no_update  # Prevent update if solution is not ready
 
     # Generate the updated graph (replace with actual plotting code)
-    return build_pcp(solution, preferences)
+    return (
+        build_pcp(solution, preferences),
+        create_table(solution, preferences),
+        build_heatmap(shap_values),
+    )
 
 
 # Update chart ONLY when the iterate button is clicked
