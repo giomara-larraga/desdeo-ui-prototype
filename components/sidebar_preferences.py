@@ -39,6 +39,10 @@ def create_sidebar_preferences():
                     max=nadir[index],
                     step=(np.abs(nadir[index] - ideal[index]) / 100),
                     value=nadir[index],
+                    tooltip={
+                        "always_visible": True,
+                        "transform": "roundedTooltip",
+                    },
                     marks={
                         nadir[index]: str(
                             round(nadir[index], data_problem[0]["decimal_places"])

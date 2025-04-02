@@ -17,7 +17,13 @@ from shapley_values.utilities import (
 from desdeo_problem.problem import DiscreteDataProblem
 import pandas as pd
 import numpy as np
-from components.graphs import build_pcp, get_sample_pcp, build_bar_chart, build_heatmap
+from components.graphs import (
+    build_pcp,
+    get_sample_bar_chart,
+    get_sample_pcp,
+    build_bar_chart,
+    build_heatmap,
+)
 from components.solutions_table import create_table
 
 
@@ -112,10 +118,12 @@ def update_chart(solution, shap_values, preferences):
 )
 def update_bar_chart(selected_objective, shap_values):
     if shap_values is None:
+        print("shap is none")
         return no_update  # Prevent update if solution is not ready
 
     if selected_objective is None:
-        return no_update
+        print("selected is none")
+        return get_sample_bar_chart()
     # Generate the updated graph (replace with actual plotting code)
     return build_bar_chart(shap_values[selected_objective], selected_objective)
 

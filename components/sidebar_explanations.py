@@ -13,7 +13,7 @@ sidebar_explanations = html.Div(
             [
                 dbc.Tab(tab2_content, label="Explanations"),
                 dbc.Tab(tab3_content, label="Advanced"),
-                dbc.Tab(tab1_content, label="Details"),
+                # dbc.Tab(tab1_content, label="Details"),
             ]
         ),
     ],
