@@ -1,19 +1,13 @@
 from dash import html, dcc
+import dash_bootstrap_components as dbc
 from components.graphs import get_sample_bar_chart
 from data.constants import data_problem
 
 explanations_content = html.Div(
     [
         html.P(" "),
-        html.Ol(
-            [
-                html.Li(
-                    "Choose an objective function value from that solution that you want to improve."
-                ),
-                html.Li(
-                    "A plot displaying the how each component of the reference point affect the selected objective function will be displayed. "
-                ),
-            ],
+        html.P(
+            "Choose the objective function you want to improve in the solution.",
             className="description-text",
         ),
         dcc.Dropdown(
@@ -41,7 +35,17 @@ explanations_content = html.Div(
                     zip(data_problem[0]["objective_names"], data_problem[0]["colors"])
                 )
             ],
-            placeholder="Select an objective function to improve",
+            placeholder="Select an objective function",
+        ),
+        html.P(" "),
+        html.P(
+            [
+                html.Span("Red", style={"color": "#C00000"}),
+                " bars indicate objectives that negatively impact the selected objective, while ",
+                html.Span("blue", style={"color": "blue"}),
+                " bars indicate positive effects.",
+            ],
+            className="description-text",
         ),
         dcc.Graph(
             id="bar-chart",
@@ -49,8 +53,17 @@ explanations_content = html.Div(
             style={
                 "margin": "0",
                 "padding": "0",
-                "padding-top": "1rem",
+                "paddingTop": "1rem",
             },  # Remove margin and padding
+        ),
+        html.P(" "),
+        dbc.Alert(
+            [
+                html.I(className="bi bi-lightbulb", style={"marginRight": "10px"}),
+                "To improve the selected objective, consider impairing red-bar objectives or those with smaller blue bars.",
+            ],
+            color="primary",
+            className="description-text",
         ),
     ]
 )

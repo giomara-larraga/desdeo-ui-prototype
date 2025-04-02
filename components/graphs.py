@@ -168,7 +168,7 @@ def get_sample_bar_chart():
             y=[None],  # Empty y value, just for legend
             mode="markers",
             marker=dict(size=12, color="#C00000"),  # Red marker
-            name="Impairing effect",
+            showlegend=False,
         )
     )
 
@@ -178,14 +178,13 @@ def get_sample_bar_chart():
             y=[None],  # Empty y value
             mode="markers",
             marker=dict(size=12, color="blue"),  # Blue marker
-            name="Improving effect",
+            showlegend=False,
+            # name="Improving effect",
         )
     )
     fig.update_layout(
         height=250,  # Set the height (in pixels)
-        margin=dict(
-            l=1, r=0, t=50, b=10
-        ),  # Remove left, right, top, and bottom margins
+        margin=dict(l=1, r=0, t=0, b=10),  # Remove left, right, top, and bottom margins
         plot_bgcolor="white",
         xaxis=dict(
             layer="above traces",  # Ensures x-axis is on top
@@ -210,13 +209,6 @@ def get_sample_bar_chart():
             mirror=True,
             zeroline=True,  # Draw zero line
             zerolinecolor="black",  # Make it more visible
-        ),
-        legend=dict(
-            orientation="h",  # Horizontal legend
-            yanchor="bottom",
-            y=1.1,  # Position above the plot
-            xanchor="center",
-            x=0.5,  # Centered
         ),
     )
 
@@ -254,7 +246,7 @@ def build_bar_chart(values, selected_objective):
             y=[None],  # Empty y value, just for legend
             mode="markers",
             marker=dict(size=12, color="#C00000"),  # Red marker
-            name="Impairing effect",
+            showlegend=False,
         )
     )
 
@@ -264,14 +256,12 @@ def build_bar_chart(values, selected_objective):
             y=[None],  # Empty y value
             mode="markers",
             marker=dict(size=12, color="blue"),  # Blue marker
-            name="Improving effect",
+            showlegend=False,
         )
     )
     fig.update_layout(
         height=250,  # Set the height (in pixels)
-        margin=dict(
-            l=1, r=0, t=50, b=10
-        ),  # Remove left, right, top, and bottom margins
+        margin=dict(l=1, r=0, t=0, b=10),  # Remove left, right, top, and bottom margins
         plot_bgcolor="white",
         xaxis=dict(
             layer="above traces",  # Ensures x-axis is on top
@@ -296,13 +286,6 @@ def build_bar_chart(values, selected_objective):
             mirror=True,
             zeroline=True,  # Draw zero line
             zerolinecolor="black",  # Make it more visible
-        ),
-        legend=dict(
-            orientation="h",  # Horizontal legend
-            yanchor="bottom",
-            y=1.1,  # Position above the plot
-            xanchor="center",
-            x=0.5,  # Centered
         ),
     )
 

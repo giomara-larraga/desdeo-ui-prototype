@@ -42,7 +42,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     /*font-size: 12px;*/
-    background-color: #DFE1E5;
+    background-color: #F5FBFF;
 }
 
 h5 {
@@ -59,7 +59,7 @@ h5 {
 
 /* Custom style for dbc.NavbarSimple */
 .custom-navbar {
-    background-color: #1e2a3a !important; /* Dark blue background */
+    background-color: #092C4C !important; /* Dark blue background */
     color: white; /* White text color */
     font-family: 'Roboto', sans-serif; /* Custom font family */
     font-weight: 400; /* Bold font weight */
@@ -109,7 +109,7 @@ h5 {
     padding-top: 5px;
     background: #fff !important;
     height: 100vh;
-    border-right: solid 1px #A09B9B;
+    border-right: solid 1px #dee2e6;
 }
 
 .description-text {
@@ -123,7 +123,7 @@ h5 {
     padding-top: 5px;
     background: #fff !important;
     height: 100vh;
-    border-left: solid 1px #A09B9B;
+    border-left: solid 1px #dee2e6;
 }
 
 /* Solutions panel */
