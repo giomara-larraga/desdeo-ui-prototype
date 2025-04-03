@@ -6,7 +6,7 @@ app = Dash(
     __name__,
     suppress_callback_exceptions=True,
     external_stylesheets=[
-        dbc.themes.BOOTSTRAP,
+        "/assets/bootstrap.min.css",
         dbc.icons.BOOTSTRAP,
     ],
 )

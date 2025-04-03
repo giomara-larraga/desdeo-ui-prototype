@@ -68,6 +68,70 @@ def build_pcp(solution, preferences):
     ideal = data_problem[0]["ideal"]
     nadir = data_problem[0]["nadir"]
     dimensions = data_problem[0]["objective_names"]
+
+    line1 = solution[0]
+    line2 = list(preferences.values())
+    # Combine both lines into a single dataset
+    values = np.array([line1, line2])
+
+    # Assign a categorical index for coloring
+    color_values = [0, 1]  # 0 for Red, 1 for Yellow
+
+    # Create the Parallel Coordinate Plot
+    fig = go.Figure(
+        go.Parcoords(
+            line=dict(
+                color=color_values,  # Assign colors
+                colorscale=[
+                    [0, "blue"],
+                    [1, "black"],
+                ],  # Red for first, Yellow for second
+            ),
+            dimensions=[
+                {
+                    "label": dimensions[i],
+                    "values": values[:, i],
+                    "range": [ideal[i], nadir[i]],  # Range should be [min, max]
+                }  # Assign values for each dimension
+                for i in range(values.shape[1])
+            ],
+        )
+    )
+    # Adding annotations for axis labels (colored squares)
+    annotations = []
+    axis_colors = data_problem[0]["colors"]
+
+    for i, dim in enumerate(dimensions):
+        annotations.append(
+            dict(
+                x=0.25 * (i),  # Position of the colored square (adjust as needed)
+                y=1.1,  # Position above the plot
+                xref="paper",
+                yref="paper",  # Reference to paper (the entire plotting area)
+                text="",  # No axis label text here
+                showarrow=False,  # No arrow
+                font=dict(size=12, color="black"),
+                bgcolor=axis_colors[i],  # Background color (square color)
+                width=10,  # Size of the colored square
+                height=10,  # Size of the colored square
+                align="center",  # Center the text inside the square
+            )
+        )
+
+    # Update layout with annotations and adjust plot layout
+    fig.update_layout(
+        height=300,  # Set the height (in pixels)
+        margin=dict(l=10, r=10, t=50, b=10),  # Set margins
+        annotations=annotations,  # Add annotations for the axes
+    )
+
+    return fig
+
+
+def build_pcp2(solution, preferences):
+    ideal = data_problem[0]["ideal"]
+    nadir = data_problem[0]["nadir"]
+    dimensions = data_problem[0]["objective_names"]
     # ranges = pd.DataFrame([ideal, nadir], columns=dimensions)
 
     solution_df = pd.DataFrame([solution[0]], columns=dimensions)

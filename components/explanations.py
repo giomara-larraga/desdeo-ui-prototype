@@ -62,7 +62,7 @@ explanations_content = html.Div(
                 html.I(className="bi bi-lightbulb", style={"marginRight": "10px"}),
                 "To improve the selected objective, consider impairing red-bar objectives or those with smaller blue bars.",
             ],
-            color="primary",
+            color="warning",
             className="description-text",
         ),
     ]
