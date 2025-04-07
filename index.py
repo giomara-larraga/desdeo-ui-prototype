@@ -6,9 +6,6 @@ from layouts import home, main_layout
 from utils.RXIMO import get_problem_data
 from components.sidebar_preferences import create_sidebar_preferences
 from components.solutions_panel import solutions_panel
-from components.sidebar_explanations_option1 import sidebar_explanations_option1
-from components.sidebar_explanations_option2 import sidebar_explanations_option2
-
 
 problem_data = get_problem_data()
 sidebar_preferences = create_sidebar_preferences()
@@ -26,6 +23,8 @@ app_layout = html.Div(
             id="opt1-selected-objective-store", storage_type="session", data=None
         ),
         dcc.Store(id="click-store", data={"n_clicks": 0}),
+        dcc.Store(id="barchart-scale-store", data="REL"),
+        dcc.Store(id="heatmap-scale-store", data="ABS"),
         dcc.Location(id="url", refresh=False),
         navbar,
         home.layout,

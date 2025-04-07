@@ -41,11 +41,21 @@ explanations_content = html.Div(
         html.P(
             [
                 html.Span("Red", style={"color": "#C00000"}),
-                " bars indicate objectives that negatively impact the selected objective, while ",
+                "  bars represent objectives that are in tradeoff with the selected objective, while ",
                 html.Span("blue", style={"color": "blue"}),
-                " bars indicate positive effects.",
+                " bars represent those with synergies.",
             ],
             className="description-text",
+        ),
+        dcc.RadioItems(
+        id="radio-scale",
+        options={
+                'ABS': 'Absolute scale ',
+                'REL': 'Relative scale'        },
+        value='REL',
+        inline=True,
+        className="description-text",
+
         ),
         dcc.Graph(
             id="bar-chart",
@@ -60,7 +70,7 @@ explanations_content = html.Div(
         dbc.Alert(
             [
                 html.I(className="bi bi-lightbulb", style={"marginRight": "10px"}),
-                "To improve the selected objective, consider impairing red-bar objectives or those with smaller blue bars.",
+                "To improve the selected objective, consider impairing those with stronger trade-offs or weaker synergies.",
             ],
             color="warning",
             className="description-text",

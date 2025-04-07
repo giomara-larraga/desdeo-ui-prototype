@@ -279,30 +279,34 @@ def get_sample_bar_chart():
     return fig
 
 
-def build_bar_chart(values, selected_objective):
+def build_bar_chart(values, selected_objective, scale="REL"):
+    values_to_plot = values[selected_objective]
+    values_to_plot[selected_objective] = 0
+
+        
+        
+    norm_v = np.linalg.norm(values_to_plot, keepdims=True)
+    values_to_plot = values_to_plot/norm_v
+
     objectives = data_problem[0]["objective_names"]
-    # values = [500, -600, 700, 500, -55]  # Example values
 
     # Assign colors based on value (red if >0, blue if <0)
-    colors = ["#C00000" if v > 0 else "blue" for v in values]
+    colors = ["#C00000" if v > 0 else "blue" for v in values_to_plot]
     colored_labels = [
         f"<span style='color:{c}; font-size:20px'>&#9632;</span> {obj}"
         for obj, c in zip(objectives, data_problem[0]["colors"])
     ]
 
-    values[selected_objective] = 0
-
     fig = go.Figure()
     fig.add_trace(
         go.Bar(
             x=colored_labels,
-            y=values,
+            y=values_to_plot,
             marker=dict(color=colors),  # Set color dynamically
             showlegend=False,  # Hide this trace from the legend
-            # text="test",
-            # marker_color="crimson",
         )
     )
+
     # Dummy Scatter Traces for Legend
     fig.add_trace(
         go.Scatter(
@@ -323,6 +327,7 @@ def build_bar_chart(values, selected_objective):
             showlegend=False,
         )
     )
+
     fig.update_layout(
         height=250,  # Set the height (in pixels)
         margin=dict(l=1, r=0, t=0, b=10),  # Remove left, right, top, and bottom margins
@@ -353,10 +358,18 @@ def build_bar_chart(values, selected_objective):
         ),
     )
 
+    if (scale =="ABS"):
+        min_value = min([min(element) for element in values])
+        max_value = max([max(element) for element in values])
+        fig.update_yaxes(range=[min_value,max_value])
+
+
     return fig
 
 
-def build_heatmap(values):
+def build_heatmap(values, scale="ABS"):
+
+
     objectives = data_problem[0]["objective_names"]  # Get row/column names
     print(values)
     # Check if values is None or empty
@@ -368,6 +381,8 @@ def build_heatmap(values):
         )
         return fig
 
+    
+
     # Convert values to a NumPy array for safety
     values = np.array(values)
 
@@ -376,6 +391,11 @@ def build_heatmap(values):
         raise ValueError("Input matrix must be square (N × N).")
 
     np.fill_diagonal(values, 0)
+
+    if (scale =="ABS"):
+        x_norm = np.linalg.norm(values, axis=1, keepdims=True)
+        values = values/x_norm
+        #df_norm_row = df.apply(lambda x: (x-np.mean(x))/np.std(x), axis = 1)
 
     fig = go.Figure(
         data=go.Heatmap(
@@ -391,8 +411,9 @@ def build_heatmap(values):
     fig.update_layout(
         height=250,
         margin=dict(l=1, r=0, t=5, b=10),
-        xaxis_title="Reference point",  # X-axis label
-        yaxis_title="Obtained solution",
     )
+
+    #fig.update_xaxes(side="top")
+
 
     return fig

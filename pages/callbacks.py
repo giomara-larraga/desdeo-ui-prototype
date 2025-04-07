@@ -95,10 +95,11 @@ def load_data(n_clicks, preferences, click_data):
     [
         Input("opt1-current-solution-store", "data"),
         Input("opt1-shap-values-store", "data"),
+        Input("heatmap-scale-store", "data")
     ],
     [State("opt1-preferences-store", "data")],  # Use State instead of Input
 )
-def update_chart(solution, shap_values, preferences):
+def update_chart(solution, shap_values, scale,preferences):
     if solution is None:
         return no_update  # Prevent update if solution is not ready
 
@@ -106,17 +107,17 @@ def update_chart(solution, shap_values, preferences):
     return (
         build_pcp(solution, preferences),
         create_table(solution, preferences),
-        build_heatmap(shap_values),
+        build_heatmap(shap_values,scale),
     )
 
 
 # Update chart ONLY when the iterate button is clicked
 @app.callback(
     Output("bar-chart", "figure"),
-    [Input("opt1-selected-objective-store", "data")],
+    [Input("opt1-selected-objective-store", "data"), Input("barchart-scale-store", "data")],
     [State("opt1-shap-values-store", "data")],  # Use State instead of Input
 )
-def update_bar_chart(selected_objective, shap_values):
+def update_bar_chart(selected_objective, scale, shap_values):
     if shap_values is None:
         print("shap is none")
         return no_update  # Prevent update if solution is not ready
@@ -125,7 +126,7 @@ def update_bar_chart(selected_objective, shap_values):
         print("selected is none")
         return get_sample_bar_chart()
     # Generate the updated graph (replace with actual plotting code)
-    return build_bar_chart(shap_values[selected_objective], selected_objective)
+    return build_bar_chart(shap_values, selected_objective, scale)
 
 
 @app.callback(
@@ -135,3 +136,22 @@ def update_bar_chart(selected_objective, shap_values):
 def update_output(value):
     print("selected ", value)
     return value
+
+
+@app.callback(
+    Output("barchart-scale-store", "data"),
+    Input("radio-scale", "value"),
+)
+def update_scale(value):
+    print("Scale ", value)
+    return value
+
+
+@app.callback(
+    Output("heatmap-scale-store", "data"),
+    Input("radio-scale-heatmap", "value"),
+)
+def update_scale_heatmap(value):
+    print("Scale ", value)
+    return value
+    
