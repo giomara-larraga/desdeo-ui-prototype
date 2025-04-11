@@ -70,7 +70,7 @@ explanations_content = html.Div(
         dbc.Alert(
             [
                 html.I(className="bi bi-lightbulb", style={"marginRight": "10px"}),
-                "To improve the selected objective, consider impairing those with stronger trade-offs or weaker synergies.",
+                "To improve the [name of the objective], consider impairing those with stronger trade-offs [list] or weaker synergies [list].",
             ],
             color="warning",
             className="description-text",

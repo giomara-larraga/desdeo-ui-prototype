@@ -361,14 +361,18 @@ def build_bar_chart(values, selected_objective, scale="REL"):
     if (scale =="ABS"):
         min_value = min([min(element) for element in values])
         max_value = max([max(element) for element in values])
-        fig.update_yaxes(range=[min_value,max_value])
+        fig.update_yaxes(range=[-1,1])
 
 
     return fig
 
 
 def build_heatmap(values, scale="ABS"):
-
+    # TODO: Squares instead of rectangles
+    # why are the max and min values not 1?
+    # normalization columnwise and rowwise
+    # variation of heatmap with small plots
+    
 
     objectives = data_problem[0]["objective_names"]  # Get row/column names
     print(values)
